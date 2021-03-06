@@ -5,9 +5,9 @@
 from utils import load_image, plot_image
 import numpy as np
 from numpy.random import random_sample as rand
-from algorithms import reconstruct
+from algorithms import reconstruct, trivial_reconstruct
 
-loss_frac = 0.7
+loss_frac = 0.9
 
 def main():
     # Load and plot original image.
@@ -23,7 +23,7 @@ def main():
 
     # Reconstruct the image
     print('\nPerforming image reconstruction.')
-    rec_image = reconstruct(corr_image, mask, max_iter=100)
+    rec_image = trivial_reconstruct(corr_image, mask) #, lam = 0.03, max_iter=100)
     print('Reconstruction complete!')
     print('Displaying Reconstructed Image.')
     plot_image(rec_image)
