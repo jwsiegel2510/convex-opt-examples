@@ -4,7 +4,7 @@
 
 import numpy as np
 
-def trivial_reconstruct(corr_image, mask):
+def trivial_inpaint(corr_image, mask):
     rec_image = corr_image
     while np.sum(mask) < np.sum(np.ones_like(mask)) - 0.5:
         for i in range(rec_image.shape[0]):

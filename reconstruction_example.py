@@ -1,11 +1,15 @@
 # Author: Jonathan Siegel
 #
-# Contains a rudimentary inpainting example to play around with.
+# Contains an image reconstruction example, where an image is reconstructed from
+# a fraction of its Fourier transform. The reconstruction is performed by finding
+# a minimal wavelet l1 norm image which matches the gives Fourier coefficients.
 
 from utils import load_image, plot_image
 import numpy as np
 from numpy.random import random_sample as rand
-from algorithms import reconstruct, trivial_reconstruct
+from algorithms import reconstruct
+
+sample_frac = 0.60
 
 def main():
     # Load and plot original image.
@@ -13,22 +17,20 @@ def main():
     image = load_image()
     plot_image(image)
 
-    # Randomly delete pixels from the original image.
-    print('\nMany pixel values have been lost.\nHere is the corrupted image.')
-    mask = np.ones_like(image)
-    for i in range(mask.shape[0]):
-        for j in range(mask.shape[1]):
-            if i%40 < 30 and j % 40 < 30:
-                mask[i][j] = 0
-    corr_image = np.multiply(image, mask)
-    plot_image(corr_image)
+    # Randomly sample entries of the Fourier transform of the signal.
+    print('\n%2.0f%% of the Fourier transform of the image has been sampled.' % (sample_frac*100))
+    transform = np.fft.rfftn(image, norm='ortho')
+    mask = np.double(rand(transform.shape) < sample_frac)
+    sampled_transform = np.multiply(transform, mask)
+    print('Displaying image obtained by setting remaining Fourier modes to 0.')
+    plot_image(np.clip(np.fft.irfftn(sampled_transform, norm='ortho'), 0, 1))
 
     # Reconstruct the image
     print('\nPerforming image reconstruction.')
-    rec_image = reconstruct(corr_image, mask, lam = 0.3, max_iter=50, alg='dr', wavelet_order=4)
+    rec_image = reconstruct(sampled_transform, mask, lam = 0.4, max_iter=100, wavelet_order=2)
     print('Reconstruction complete!')
     print('Displaying Reconstructed Image.')
-    plot_image(rec_image)
+    plot_image(np.clip(rec_image, 0, 1))
 
 if __name__ == '__main__':
     main()

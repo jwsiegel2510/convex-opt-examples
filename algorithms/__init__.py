@@ -1,2 +1,2 @@
-from .wavelet_lasso import reconstruct
-from .trivial_reconstruct import trivial_reconstruct
+from .wavelet_reconstruct import reconstruct
+from .trivial_inpaint import trivial_inpaint
