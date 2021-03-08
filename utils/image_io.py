@@ -7,8 +7,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Read an image and normalize to [0,1].
-def load_image(filename='lenna-image.jpeg'):
+def load_image(filename='mickey.jpg'):
     image = imread(filename)
+    if len(image.shape) == 3:
+        image = np.sum(image, axis=-1)
     return image / np.max(image)
 
 # Plot an image.
