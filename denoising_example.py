@@ -1,6 +1,6 @@
 # Author: Jonathan Siegel
 #
-# Contains an example of image denoising using wavelets.
+# Contains an example of image denoising using softthresholding of the wavelet coefficients.
 
 from utils import load_image, plot_image
 import numpy as np
