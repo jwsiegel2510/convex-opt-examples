@@ -69,15 +69,6 @@ def get_filters(order):
         wavelet_filters[order] = wavelet_filter
     return {'principal': principal_filters[order], 'wavelet': wavelet_filters[order]}
 
-#s = math.sqrt(3)
-#r = (1 + s) / (1 - s)
-#d2_unorm = np.array([r, r*s, -1.0*s, 1.0])
-
-#principal_filters = {'haar': (1.0 / math.sqrt(2)) * np.array([1.0, 1.0]),
-#                     'daubechies2': (1.0 / np.linalg.norm(d2_unorm)) * d2_unorm}
-#second_filters = {'haar': (1.0 / math.sqrt(2)) * np.array([1.0, -1.0]),
-#                  'daubechies2': (1.0 / np.linalg.norm(d2_unorm)) * np.array([d2_unorm[3], -1.0*d2_unorm[2], d2_unorm[1], -1.0*d2_unorm[0]])}
-
 # Wavelet transform. Assumes the signal length is a power of 2. Performs the transform for each row.
 def wavelet_transform_1d(signal, wavelet_order=0):
     if signal.shape[1] <= 1:
@@ -88,10 +79,9 @@ def wavelet_transform_1d(signal, wavelet_order=0):
     filters = get_filters(wavelet_order)
     principal_filter = filters['principal']
     wavelet_filter = filters['wavelet']
-    for i in range(signal.shape[1] // 2):
-        for j in range(principal_filter.size):
-            transform[:, i] += principal_filter[j] * signal[:, (2*i + j) % signal.shape[1]]
-            transform[:, signal.shape[1] // 2 + i] += wavelet_filter[j] * signal[:, (2*i + j) % signal.shape[1]]
+    for j in range(principal_filter.size):
+        transform[:, 0:(signal.shape[1] // 2)] += principal_filter[j] * np.roll(signal, -j, axis=1)[:, 0::2]
+        transform[:, (signal.shape[1] // 2):] += wavelet_filter[j] * np.roll(signal, -j, axis=1)[:, 0::2]
     transform[:, 0:signal.shape[1] // 2] = wavelet_transform_1d(transform[:, 0:signal.shape[1] // 2], wavelet_order)
     return transform
 
