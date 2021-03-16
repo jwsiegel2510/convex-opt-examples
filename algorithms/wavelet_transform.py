@@ -120,11 +120,8 @@ def wavelet_l1(image, wavelet_order=0):
     transform = wavelet_transform_2d(image, wavelet_order)
     return np.sum(np.abs(transform))
 
-# Calculate the wavelet shrink.
+# HERE IS THE FUNCTION YOU NEED TO IMPLEMENT. Calculate the wavelet-l1 prox.
 def wavelet_l1_prox(image, wavelet_order=0, lam=1.0):
-    transform = wavelet_transform_2d(image, wavelet_order)
-    transform = np.multiply(np.sign(transform), np.multiply((np.absolute(transform) - lam > 0), np.absolute(transform) - lam))
-    return inv_wavelet_transform_2d(transform, wavelet_order)
 
 # Tests the wavelet transforms.
 def main():
