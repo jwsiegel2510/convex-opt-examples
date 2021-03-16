@@ -28,8 +28,8 @@ def main():
     print('\nReconstructing image from remaining wavelets.')
     rec_image = inv_wavelet_transform_2d(transform, wavelet_order=2)
     print('Displaying Compressed Image.')
-    # Assumes that the size of a float is 8 bits.
-    compression_factor = nonzero_fraction - (1/8)*(math.log2(nonzero_fraction) * nonzero_fraction + \
+    # Assumes that the size of a float is 8 bytes (i.e. 64 bits).
+    compression_factor = nonzero_fraction - (1/64)*(math.log2(nonzero_fraction) * nonzero_fraction + \
                                                    math.log2(1.0 - nonzero_fraction) * (1.0 - nonzero_fraction))
     print('Image has been compressed by a factor of %f' % (1.0 / compression_factor))
     plot_image(np.clip(rec_image, 0, 1))

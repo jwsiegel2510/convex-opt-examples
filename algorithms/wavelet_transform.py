@@ -122,6 +122,7 @@ def wavelet_l1(image, wavelet_order=0):
 
 # HERE IS THE FUNCTION YOU NEED TO IMPLEMENT. Calculate the wavelet-l1 prox.
 def wavelet_l1_prox(image, wavelet_order=0, lam=1.0):
+    return 0
 
 # Tests the wavelet transforms.
 def main():
