@@ -7,7 +7,7 @@ import numpy as np
 from numpy.random import random_sample as rand
 from algorithms import wavelet_l1_prox
 
-noise_level = 0.7
+noise_level = 1.0
 
 def main():
     # Load and plot original image.
@@ -15,15 +15,14 @@ def main():
     image = load_image()
     plot_image(image)
 
-    # Randomly sample entries of the Fourier transform of the signal.
+    # Add Gaussian noise to the image and clip it back to [0,1].
     print('\nImage has been corrupted and made noisy.')
     image = image + np.random.normal(scale=noise_level, size=image.shape)
     plot_image(np.clip(image, 0, 1))
 
-    # Reconstruct the image
+    # Reconstruct the image by soft-thresholding the wavelet coefficients.
     print('\nPerforming image denoising using wavelets.')
-    # NOTE: This is the function you need to implement in the file algorithms/wavelet_transform.py
-    rec_image = wavelet_l1_prox(image, lam=1.1, wavelet_order=3)
+    rec_image = wavelet_l1_prox(image, lam=1.3, wavelet_order=3)
     print('Denoising complete!')
     print('Displaying Denoised Image.')
     plot_image(np.clip(rec_image, 0, 1))
