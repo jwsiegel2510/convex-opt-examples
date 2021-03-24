@@ -11,7 +11,7 @@ the largest coefficients. This suffices to reconstruct an image which is visuall
 identical to the original image. A compression ratio is calculated based upon the number
 of non-zero coefficients and the amount of space it takes to store their location. This
 technique is very powerful, simple images can be compressed by a factor of almost 100.
-For play with this experiment, simply run compression_example.py.
+To play with this experiment, simply run compression_example.py.
 
 ## Wavelet Denoising Example
 
@@ -24,5 +24,5 @@ do this is to solve the following optimization problem
 argmin_f (1/2)|f - I|^2 + lambda*|Qf|_1,
 
 where lambda is a parameter which depends upon the amount of noise in the image
-and QF denotes the wavelet transform. To test this, run the code in
-denoising_example.py.
+and QF denotes the wavelet transform. To test this approach for denoising images with
+random Gaussian noise, run denoising_example.py.
