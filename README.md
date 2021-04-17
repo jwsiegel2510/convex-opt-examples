@@ -26,3 +26,19 @@ argmin_f (1/2)|f - I|^2 + lambda*|Qf|_1,
 where lambda is a parameter which depends upon the amount of noise in the image
 and QF denotes the wavelet transform. To test this approach for denoising images with
 random Gaussian noise, run denoising_example.py.
+
+## Compressed Sensing Example
+
+In this experiment, we implement an algorithm which reconstructs a sparse vector given a
+small sample of its Fourier transform, utilizing the famous Dantzig estimator from compressed
+sensing. Specifically, we generate a random vector x_0 for which only a small percentage of entries
+are nonzero, the nonzero entries being random independent Gaussians. We then sample a percentage
+of the entries Fourier transform of x_0 and solve the optimization problem
+
+argmin_{Ax=b} |x|_1,
+
+where the constraint Ax=b means that the Fourier transform of x should match that of x_0 in the
+sampled entries. This optimization problem is then solved using Douglas-Rachford iteration.
+To test this experiment, run sensing_example.py. You should observe that the original vector
+(of dimension 512) can be reliably recovered from about 10% of its Fourier transform as long as
+only 1% of its entries are nonzero.
