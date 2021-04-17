@@ -38,7 +38,7 @@ of the entries Fourier transform of x_0 and solve the optimization problem
 argmin_{Ax=b} |x|_1,
 
 where the constraint Ax=b means that the Fourier transform of x should match that of x_0 in the
-sampled entries. This optimization problem is then solved using Douglas-Rachford iteration.
+sampled entries. This optimization problem is then solved using the Douglas-Rachford iteration.
 To test this experiment, run sensing_example.py. You should observe that the original vector
 (of dimension 512) can be reliably recovered from about 10% of its Fourier transform as long as
 only 1% of its entries are nonzero.
