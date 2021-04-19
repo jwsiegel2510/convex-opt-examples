@@ -30,7 +30,7 @@ where lambda is a parameter which depends upon the amount of noise in the image
 and QF denotes the wavelet transform. 
 
 To test this approach for denoising images with
-random Gaussian noise, run **denoising_example.py**.
+random Gaussian noise, run **wavelet_denoising_example.py**.
 
 ## Compressed Sensing Example
 
