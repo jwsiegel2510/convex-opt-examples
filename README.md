@@ -3,7 +3,8 @@
 Here we provide some code for the Math555 Optimization Theory course at Penn State,
 cotaught by Jonathan Siegel and Jinchao Xu.
 
-The examples we provide are mostly applications of optimization to image processing.
+The examples we provide are mostly applications of optimization to some problems in 
+image processing.
 
 ## Wavelet Compression Example
 
