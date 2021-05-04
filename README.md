@@ -55,22 +55,23 @@ only 1% of its entries are nonzero.
 ## Total Variation Denoising Example
 
 In this experiment, we test the total variation method for image denoising. In this method, a noisy
-image f is denoised by denoised by solving the optimization problem
+image f is denoised by solving the optimization problem
 
 argmin_u (1/2)|f - u|^2 + lambda*|Du|_1,
 
 where D represents to gradient operator, |Du|_1 is the L1-norm of the gradient or total variation norm,
 and |f-u| is the L2-norm of the error between f and u. The total variation norm can more generally be
-defined for function which not necessarily differentiable, which leads to the more precise primal dual
+defined for functions which are not necessarily differentiable, which leads to the more precise primal dual
 formulation of the total variation objective
 
 argmin_u max_{v:|v|<=lambda} (1/2)|f - u|^2 + (D.v,u),
 
 where the maximum is taken over all vector fields v which vanish at the boundary of the domain and whose
-magnitude does not exceed lambda. Here D.v denotes the divergence and (.,.) is the L2-inner product. We
-discretize this problem by taking the function u to be piecewise constant on a grid and taking the dual
+magnitude does not exceed lambda. Here D.v denotes the divergence and (.,.) is the L2-inner product. 
+
+We discretize this problem by taking the function u to be piecewise constant on a grid and taking the dual
 variable v to be piecewise bilinear on the same grid and vanishing on the boundary. Then we formulate
 and solve the dual problem using accelerated forward-backward splitting and reconstruct the primal
 solution u. The method is quite effective, especially on the piecewise constant image mickey.jpg.
 
-To test this method, run **total_variation_denoising_xample.py**.
+To test this method, run **total_variation_denoising_example.py**.
